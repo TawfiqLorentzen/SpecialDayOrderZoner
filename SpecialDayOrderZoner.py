@@ -11,17 +11,17 @@ chermside = [4035, 4010, 4051, 4054, 4007, 4060, 4034, 4066, 4036, 4014, 4065, 4
              4017, 4500, 4008, 4000, 4069, 4008, 4055, 4034, 4500, 4069, 4032, 4011, 4017,
              4009, 4037, 4051, 4053, 4055, 4018, 4006, 4051, 4034, 4031, 4051, 4007, 4011,
              4006, 4068, 4031, 4059, 4069, 4054, 4030, 4053, 4064, 4053, 4066, 4005, 4051,
-             4006, 4013, 4014, 4012, 4064, 4000, 4008, 4178, 4069, 4059, 4017, 4067, 4053,
+             4006, 4013, 4014, 4012, 4064, 4000, 4008, 4069, 4059, 4017, 4067, 4053,
              4052, 4018, 4068, 4005, 4061, 4066, 4055, 4014, 4012, 4032, 4051, 5030, 4030,
              4034]
 
 carindale = [4161, 4171, 4153, 4103, 4159, 4171, 5152, 4170, 4157, 4152, 4155, 4163, 4151,
              4102, 4169, 4103, 4120, 4154, 4171, 4174, 4101, 4169, 4179, 4178, 4179, 4105,
              4170, 4165, 4172, 4170, 4160, 4154, 4165, 4170, 4157, 4101, 4158, 4164, 4173,
-             4165, 4154, 4160, 4101, 4152, 4102, 4207, 4178]
+             4165, 4154, 4160, 4101, 4152, 4102, 4207, 4178, 417]
 
 northlakes = [4510, 4035, 4017, 4505, 4510, 4019, 4503, 4521, 4508, 4520, 4503, 4500, 4503,
-              4021, 4503, 4501, 4509, 4109, 4510, 4506, 4503, 4504, 4020, 4509, 4502, 4022,
+              4021, 4503, 4501, 4509, 4510, 4506, 4503, 4504, 4020, 4509, 4502, 4022,
               4020, 4510, 4500, 4510, 4500, 4509, 4503, 4019]
 
 garden = [4110, 4115, 4108, 4300, 4207, 4117, 4205, 4124, 4118, 4207, 4156, 4116,
@@ -60,7 +60,9 @@ def get_order_info():
     browser["email"] = "rositaflowersmarketing@gmail.com"
     browser["pw"] = "subazuku"
     browser.submit_selected()
-    browser.open("https://www.myweblogin.com/cgi-bin/newsbcms/shop/orders.cgi?siteid=mlg19q54gl&runsheet=1&from=2022-02-14&runsheet=1")
+    sunday = "https://www.myweblogin.com/cgi-bin/newsbcms/shop/orders.cgi?siteid=mlg19q54gl&runsheet=1&from=2022-05-08&runsheet=1"
+    saturday = "https://www.myweblogin.com/cgi-bin/newsbcms/shop/orders.cgi?siteid=mlg19q54gl&runsheet=1&from=2022-05-07&runsheet=1"
+    browser.open(saturday)
     #browser.open("https://www.myweblogin.com/cgi-bin/newsbcms/shop/orders.cgi?runsheet=1&siteid=mlg19q54gl")
     page = browser.get_current_page()
     todays_links = page.find_all(href=re.compile("display"))
@@ -174,12 +176,10 @@ def generate_csv():
     goldcoast_csv = r'C:\Users\Office\PycharmProjects\SpecialDayOrderZoner\csv_files\Goldcoast.csv'
     chermside_csv = r'C:\Users\Office\PycharmProjects\SpecialDayOrderZoner\csv_files\Chermside.csv'
     csvfiles = [carindale_csv, garden_csv, chermside_csv, northlakes_csv, goldcoast_csv]
-    header = ['Full Name', 'Delivery Address', 'Postcode', 'Telephone', 'Product', 'Note']
     i = 0
     for file in csvfiles:
         with open(file, 'w', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(header)
             writer.writerows(all_orders[i])
         i += 1
 
